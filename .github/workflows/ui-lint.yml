@@ -1,5 +1,6 @@
 name: Lint UI with eslint and prettier
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - master
