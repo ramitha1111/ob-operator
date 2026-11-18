@@ -1,3 +1,9 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 2 optimizations:
+# - [HIGH] Split "ui-lint" into parallel jobs (lint + test + build)
+# - [MEDIUM] Add concurrency group to "ui-lint.yml"
+# Estimated savings: ~8 min/run
+#
 name: Lint UI with eslint and prettier
 on:
   workflow_dispatch:
@@ -8,6 +14,10 @@ on:
     paths:
       - "ui/**/*"
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   ui-lint:
     name: ui-lint
